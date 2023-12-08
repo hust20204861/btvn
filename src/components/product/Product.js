@@ -3,17 +3,26 @@ import { Link } from 'react-router-dom'
 
 const Product = ({ product }) => {
   return (
-    <ul  className="course-list">
-      
-       <li class="course-item">
-         <img src="/image/anh.jpg"  alt="Khóa học 1"/>
-         {/* src={product.images[0].url} */}
-         <h2>
-          <Link to={`/product/${product._id}`}>{product.name}</Link>
-          </h2>
-         <Link to={`/product/${product._id}`}>Xem khoa hoc</Link>
-       </li>
-     </ul>
+
+    <div className="products">
+        <img
+            className="product-img"
+            src={product.images[0].url}
+        />
+        <div className="product">
+            <h5 className="card-title">
+                <Link to={`/product/${product._id}`}>{product.name}</Link>
+            </h5>
+            <div className="ratings">
+                <div className="rating-outer">
+                    <div className="rating-inner" style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
+                </div>
+                <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
+            </div>
+            <p className="cart-price">${product.price}</p>
+            <Link to={`/product/${product._id}`} id="view_details" className="btn btn-block">View Details</Link>
+        </div>
+    </div>
   )
 }
 

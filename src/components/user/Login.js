@@ -5,20 +5,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login, clearErrors} from '../../actions/userAction'
 import Loader from '../layout/Loader'
 import { useAlert } from 'react-alert'
+import { useNavigate } from 'react-router-dom'
 
-const Login = ({ history }) => {
+
+const Login = ({ location }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const alert = useAlert();
+    const navigate = useNavigate();
 
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    // const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
 
         if(isAuthenticated) {
-            history.push('/')
+            navigate('/')
         }
 
         if(error) {
@@ -26,7 +30,7 @@ const Login = ({ history }) => {
             dispatch(clearErrors());
         }
 
-    }, [dispatch, isAuthenticated, error, history])
+    }, [dispatch, isAuthenticated, error, navigate, alert])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -38,18 +42,51 @@ const Login = ({ history }) => {
       {loading ? <Loader /> : (
         <Fragment>
             <MetaData title={'Login'}/>
-            <div class="container">
-    <h2>Đăng nhập</h2>
-    <form onSubmit={submitHandler}>
-      <label htmlFor="username">Tên đăng nhập:</label>
-      <input type="text" id="username" name="username" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <label htmlFor="password">Mật khẩu:</label>
-      <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      <Link to = '/password/forgot' className='forgot'>Forgot Password?</Link>
-      <button type="submit" id = "login">Đăng nhập</button>
-      <Link to = '/register' className='register'>Create Account</Link>
-    </form>
-  </div>
+
+<div className="row wrapper">
+                        <div className="col-10 col-lg-5">
+                            <form className="shadow-lg" onSubmit={submitHandler}>
+                                <h1 className="mb-3">Login</h1>
+                                <div className="form-group">
+                                    <label htmlFor="email_field">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email_field"
+                                        className="form-control"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="password_field">Password</label>
+                                    <input
+                                        type="password"
+                                        id="password_field"
+                                        className="form-control"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+
+                                <Link to="/password/forgot" className="float-right mb-4">Forgot Password?</Link>
+
+                                <button
+                                    id="login_button"
+                                    type="submit"
+                                    className="btn btn-block py-3"
+                                >
+                                    LOGIN
+                                </button>
+
+                                <Link to="/register" className="float-right mt-3">Create Account</Link>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
         </Fragment>
 
       )}

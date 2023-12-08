@@ -21,7 +21,6 @@ root.render(
     <AlertProvider template={AlertTemplate} {...options}>
       <App />
     </AlertProvider>
-   
   </Provider>,
   document.getElementById('root')
 );

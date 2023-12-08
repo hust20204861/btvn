@@ -3,10 +3,8 @@ import '../../App.css'
 const Footer = () => {
   return (
     <Fragment>
-      <div className="content">
-
-</div>
-<div id = "detail">   
+      <h4 className='footer'>Web-Learning</h4>
+{/* <div id = "detail">   
       <p id = "detail1">
           Udemy Business <br/>
           Giảng dạy trên Udemy <br/>
@@ -28,7 +26,7 @@ const Footer = () => {
          Sơ đồ trang web <br/>
          Tuyên bố về khả năng tiếp cận
       </p>
-</div>
+</div> */}
 
     </Fragment>
   )
